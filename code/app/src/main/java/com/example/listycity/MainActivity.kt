@@ -100,7 +100,7 @@ fun CityListScreen(
     Column(modifier = modifier.fillMaxSize()) {
         Row(modifier = Modifier.padding(16.dp)) {
 
-            Spacer(modifier = Modifier.width(2.dp))
+
 
             // var showDialog by remember { mutableStateOf(false) }
             Button(
@@ -119,6 +119,7 @@ fun CityListScreen(
 
             }
 
+            Spacer(modifier = Modifier.width(2.dp))
 
             var deleteDialog by remember { mutableStateOf(false) }
 
@@ -203,6 +204,9 @@ fun CityListScreen(
                 modifier = Modifier.weight(1f),
 
                 )
+
+            Spacer(modifier = Modifier.width(2.dp))
+
             Button(
                 modifier = Modifier.size(width = 200.dp, height = 80.dp),
                 onClick = {
