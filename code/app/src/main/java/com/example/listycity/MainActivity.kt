@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -244,11 +245,12 @@ fun CityRow(
 
         Row(
             modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = 18.dp, vertical = 14.dp)
+                .padding(horizontal = 28.dp, vertical = 24.dp)
                 .clickable {
                     onClick()
                 }
                 .background(color = Color(0xff404082))
+                .height(100.dp)
 
 
         ) {
@@ -258,13 +260,11 @@ fun CityRow(
         Text(
             text = city,
 
-            fontSize = 28.sp,
+            fontSize = 40.sp,
             color = Color.White,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 18.dp, vertical = 14.dp)
-
-
+                .padding(horizontal = 18.dp, vertical = 18.dp)
         )
 
         }
