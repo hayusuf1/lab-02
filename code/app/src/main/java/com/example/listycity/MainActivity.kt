@@ -1,5 +1,6 @@
 package com.example.listycity
 
+import android.R
 import android.content.Context
 import android.os.Bundle
 import android.widget.Button
@@ -96,6 +97,7 @@ fun CityListScreen(
     var showTextField by remember { mutableStateOf(false) }
     var selectedCity by remember { mutableStateOf("") }
     var staySelected by remember { mutableStateOf(true) }
+    var context = LocalContext.current
 
     Column(modifier = modifier.fillMaxSize()) {
         Row(modifier = Modifier.padding(16.dp)) {
@@ -172,19 +174,16 @@ fun CityListScreen(
 
 
 
-        LazyColumn(modifier = modifier.weight(1f)) {
+        LazyColumn(modifier = modifier.weight(3f)) {
             items(cities) {
                 city ->
                 CityRow(
                     city = city,
                     onClick = {
                         showTextField = false
+                        selectedCity = city
 
-                        if (staySelected){
-                            Modifier.background(color = Color.Blue)
-                            selectedCity = city
-
-                        }
+                        Modifier.background(color = Color.White)
 
 
                     }
@@ -212,8 +211,17 @@ fun CityListScreen(
                 onClick = {
                     if (newCityName.isNotBlank() && newCityName !in cities) {
                         onAddCity(newCityName)
+
+                        Toast.makeText(context, "City Added", Toast.LENGTH_LONG).show()
                         newCityName = ""
                         showTextField = false
+                    }
+                    else if(newCityName.isBlank()){
+                        Toast.makeText(context, "Enter a city", Toast.LENGTH_SHORT).show()
+                    }
+
+                    else if(newCityName in cities){
+                        Toast.makeText(context, "City already in the list", Toast.LENGTH_SHORT).show()
                     }
 
                 }
@@ -234,11 +242,11 @@ fun CityRow(
 
         Row(
             modifier = Modifier.fillMaxWidth()
-                .padding(horizontal = 28.dp, vertical = 24.dp)
+                .padding(horizontal = 18.dp, vertical = 14.dp)
                 .clickable {
                     onClick()
                 }
-                .background(color = Color.Blue)
+                .background(color = Color(0xff404082))
 
 
         ) {
