@@ -9,6 +9,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -93,30 +95,43 @@ fun CityListScreen(
     var newCityName by remember { mutableStateOf("") }
     var showTextField by remember { mutableStateOf(false) }
     var selectedCity by remember { mutableStateOf("") }
+    var staySelected by remember { mutableStateOf(true) }
 
     Column(modifier = modifier.fillMaxSize()) {
         Row(modifier = Modifier.padding(16.dp)) {
 
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(2.dp))
 
             // var showDialog by remember { mutableStateOf(false) }
             Button(
+                modifier = Modifier.size(width = 200.dp, height = 80.dp),
+
                 onClick = {
                     showTextField = true
                 }
             ) {
-                Text("Add City")
+                Text(
+
+                   text= "Add City",
+                    fontSize = 30.sp
+
+                )
+
             }
 
 
             var deleteDialog by remember { mutableStateOf(false) }
 
             Button(
+                modifier = Modifier.size(width = 200.dp, height = 80.dp),
                 onClick = {
                     deleteDialog = true
                 }
             ) {
-                Text("Delete City")
+                Text(
+                    text= "Delete City",
+                    fontSize = 28.sp
+                )
             }
 
             if(deleteDialog){
@@ -133,6 +148,7 @@ fun CityListScreen(
                         TextButton(
                             onClick = {
                                 onDeleteCity(selectedCity)
+                                staySelected = false
                                 deleteDialog = false
                             }
 
@@ -142,6 +158,7 @@ fun CityListScreen(
                         TextButton(
                             onClick = {
                                 deleteDialog = false
+                                staySelected = true
                             }
                         ) { Text("No")}
                     }
@@ -161,8 +178,13 @@ fun CityListScreen(
                     city = city,
                     onClick = {
                         showTextField = false
-                        Modifier.background(color = Color.Blue)
-                        selectedCity = city
+
+                        if (staySelected){
+                            Modifier.background(color = Color.Blue)
+                            selectedCity = city
+
+                        }
+
 
                     }
                 )
@@ -182,6 +204,7 @@ fun CityListScreen(
 
                 )
             Button(
+                modifier = Modifier.size(width = 200.dp, height = 80.dp),
                 onClick = {
                     if (newCityName.isNotBlank() && newCityName !in cities) {
                         onAddCity(newCityName)
@@ -190,7 +213,11 @@ fun CityListScreen(
                     }
 
                 }
-            ) { Text("Confirm") }
+            ) { Text(
+
+                text= "Confirm",
+                fontSize = 30.sp
+            ) }
         }
     }
 }
@@ -201,20 +228,32 @@ fun CityRow(
     city:String,
     onClick : () -> Unit){
 
+        Row(
+            modifier = Modifier.fillMaxWidth()
+                .padding(horizontal = 28.dp, vertical = 24.dp)
+                .clickable {
+                    onClick()
+                }
+                .background(color = Color.Blue)
+
+
+        ) {
+
+
 
         Text(
             text = city,
 
             fontSize = 28.sp,
+            color = Color.White,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 18.dp, vertical = 14.dp)
-                .clickable {
-                    onClick()
-                }
+
+
         )
 
-
+        }
 
 
 
