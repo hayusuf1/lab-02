@@ -71,8 +71,10 @@ class CityRepository {
         "Edmonton", "Vancouver", "Calgary", "Toronto"
     )
 
+
+
     val cities: List<String>
-        get() = _cities
+        get() = _cities.sorted()
 
     fun addCity(city:String){
         _cities.add(city)
